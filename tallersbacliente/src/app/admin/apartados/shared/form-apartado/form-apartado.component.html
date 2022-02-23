@@ -1,0 +1,89 @@
+<style>
+    .datos{
+        border: #009574 5px solid;
+        margin-bottom: 20px;
+    }
+</style>
+<div class="row justify-content-center text-center">
+    
+    <div class="col-md-6">
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="form">
+            
+            <div class="datos">
+                <h2>Datos del usuario:</h2>
+                <h3>Nombre Completo: {{libro.usuario.nombres}} {{libro.usuario.apellidos}} </h3>
+                <h3>Cargo: {{ libro.usuario.cargo}}</h3>
+                <h3>Email: {{libro.usuario.email}}</h3>
+            </div>
+            
+            <div class="datos">
+                <h2>Datos del espacio:</h2>
+                <h3>Nombre: {{libro.espacio.titulo}}</h3>
+                <h3>Descripción: {{ libro.espacio.descripcion}}</h3>
+                <h3>Cupos: {{libro.espacio.cupos}}</h3>
+                <h3>Equipos: {{libro.espacio.equipos}}</h3>
+                <h3>Proyectores: {{libro.espacio.proyectores}}</h3>
+                <h3>Dirección: {{libro.espacio.direccion}}</h3>
+            </div>
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Fecha inicio</mat-label>
+                <input
+                    matInput
+                    type="datetime-local"
+                    formControlName="fechaInicio"
+                    readonly
+                    >
+                <mat-error *ngIf="form.controls.fechaInicio.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Fecha fin</mat-label>
+                <input
+                    matInput
+                    type="datetime-local"
+                    formControlName="fechaFin"
+                    readonly
+                    >
+                <mat-error *ngIf="form.controls.fechaFin.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+        
+
+            <mat-form-field appearance="outline" class="d-block" *ngIf="libro">
+                <mat-label>Estado: </mat-label>
+                <select matNativeControl required formControlName="estado">
+                  <option value="0">Rechazado</option>
+                  <option value="1">Pendiente</option>
+                  <option value="2">Aceptado</option>
+                </select>
+            </mat-form-field>
+    
+            <div class="alert-danger mb-3" *ngIf="errors.length">
+                <div *ngFor="let error of errors">{{ error }}</div>
+            </div>
+        
+
+            <button class="btn btn-success ms-2 mb-3 w-100" [disabled]="loading">
+                {{ loading ? 'Enviando...' : 'Enviar' }}
+            </button>
+            <br>
+            <button class="btn btn-danger ms-2 w-100" routerLink="/admin/apartados">
+                Cancelar
+            </button>
+        
+            
+        </form>
+        
+    </div>
+    
+    
+   
+    
+</div>
+
+
+

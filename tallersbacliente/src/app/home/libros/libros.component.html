@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <h1 class="fw-bold"><mat-icon>list</mat-icon>Todos nuestros espacios:</h1>
+    <hr>
+
+    <div infiniteScroll (scrolled)="cargarMasLibros()">
+        <div class="row">
+            <div class="col">
+                <div class="form-group mb-5">
+                    <input type="text" class="form-control"  placeholder="Buscar espacio..." [(ngModel)]="filterPost" name="filterPost">            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngFor="let libro of libros | filter:filterPost" class="col-md-4 mb-3">
+    
+                <app-libro-card [libro]="libro"></app-libro-card>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

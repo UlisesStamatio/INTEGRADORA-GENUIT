@@ -1,0 +1,37 @@
+<mat-toolbar style="background-color: #345177; color: white;">
+    <span>Administración</span>
+
+    <button mat-button routerLink="/" class="ms-2">
+        <mat-icon>home</mat-icon> Inicio
+    </button>
+
+    <button mat-button routerLink="/admin/espacios" class="ms-2">
+        <mat-icon> map</mat-icon> Gestionar Espacios
+    </button>
+
+    <button mat-button routerLink="/admin/usuarios" class="ms-2">
+        <mat-icon>supervisor_account</mat-icon> Gestionar Usuarios
+    </button>
+
+    <button mat-button routerLink="/admin/apartados" class="ms-2">
+        <mat-icon>subject</mat-icon> Gestionar Peticiones
+    </button>
+
+    <span class="spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon> {{ user }}
+    </button>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon> Cerrar sesión
+        </button>
+    </mat-menu>
+
+
+</mat-toolbar>
+
+<div class="container p-5">
+    <router-outlet></router-outlet>
+</div>

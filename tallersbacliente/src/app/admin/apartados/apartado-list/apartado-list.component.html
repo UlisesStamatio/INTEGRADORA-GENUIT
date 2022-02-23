@@ -1,0 +1,89 @@
+<h1 class="fw-bold"><mat-icon>alarm</mat-icon>Lista de Apartados</h1>
+
+<div *ngIf="apartadosPage">
+  <table mat-table [dataSource]="apartadosPage.content" class="w-100">
+
+    <ng-container matColumnDef="Fecha de Inicio">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Inicio</th>
+      <td mat-cell *matCellDef="let libro">
+
+        <div class="d-flex gap-2">
+          <div>
+            <div class="fw-bold">{{ libro.fechaInicio }}</div>
+          </div>
+        </div>
+
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Estado">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let libro">
+        
+        <p style="color: rgb(31, 161, 31);" class="fw-bold" *ngIf="libro.estado==2">
+        	<mat-icon>alarm_on</mat-icon>  Aceptado
+        </p>
+
+        <p style="color: rgb(189, 209, 75)" class="fw-bold" *ngIf="libro.estado==1">
+            <mat-icon>alarm_add</mat-icon>
+            Pendiente
+          </p>
+
+        <p style="color: rgb(177, 44, 44)" class="fw-bold" *ngIf="libro.estado==0">
+            <mat-icon>alarm_off</mat-icon>Rechazado
+        </p>
+
+        
+
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="Fecha de Fin">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Fin</th>
+      <td mat-cell *matCellDef="let libro" class="fw-bold">
+        {{ libro.fechaFin}}
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="usuarioNombre">
+        <th mat-header-cell *matHeaderCellDef>Usuario</th>
+        <td mat-cell *matCellDef="let libro">
+          {{ libro.usuario.nombres}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="usuarioCargo">
+        <th mat-header-cell *matHeaderCellDef>Cargo</th>
+        <td mat-cell *matCellDef="let libro">
+          {{ libro.usuario.cargo}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="espacioNombre">
+        <th mat-header-cell *matHeaderCellDef>Espacio</th>
+        <td mat-cell *matCellDef="let libro">
+          {{ libro.espacio.titulo}}
+        </td>
+      </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let libro" class="text-end">
+        <button class="btn btn-primary me-2" matTooltip="Revisar o editar peticion" [routerLink]="[libro.id, 'editar']">
+            <mat-icon> rate_review</mat-icon>
+
+        </button>
+      </td>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="apartadosPage.totalElements" [pageSize]="apartadosPage.size" [pageSizeOptions]="[5, 20, 50]"
+    showFirstLastButtons (page)="onPaginateChange($event)">
+  </mat-paginator>
+</div>
+
+<br><br><br><br><br><br><br><br>

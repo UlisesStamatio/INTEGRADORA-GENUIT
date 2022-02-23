@@ -1,0 +1,75 @@
+<style>
+    .center{
+        box-sizing: border-box;
+        border: 1px solid #cccccc;
+        border-radius: 10%;
+    }
+    .reservar{
+        color: #FFF;
+        background: #345177;
+        background-image: linear-gradient(to right, transparent 50%, #009574 50%, #345177 100%);
+        background-size: 200%;
+        background-position: 0% 50%;
+        transition: 0.8s;
+    }
+    .reservar:hover {
+	color: #FFF;
+	background-position: 100% 50%;
+    }
+    </style>
+<div class="container mt-5">
+    
+
+    <div class="row justify-content-center">
+       
+        <div class=" center col-md-6 col-lg-4">
+            <br>
+            <h1 class="fw-bold text-center">Inicio de sesión</h1>
+            <form autocomplete="off" (ngSubmit)="login(formulario)" #formulario="ngForm">
+
+                <mat-form-field appearance="outline" class="d-block">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput type="email" placeholder="Correo electrónico" name="email"
+                        [(ngModel)]="credentials.email" #email="ngModel" required
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+                    <mat-error *ngIf="email.hasError('required')">
+                        Este campo es obligatorio
+                    </mat-error>
+                    <mat-error *ngIf="email.hasError('pattern')">
+                        Ingrese un correo electrónico válido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="d-block">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" placeholder="Contraseña" name="password"
+                        [(ngModel)]="credentials.password" #password="ngModel" required>
+
+                    <mat-error *ngIf="password.hasError('required')">
+                        Este campo es obligatorio
+                    </mat-error>
+                </mat-form-field>
+
+                
+                <button mat-raised-button class="reservar w-100 mb-3">
+                     Ingresar
+                </button>
+
+                <button mat-raised-button class="reservar w-100 mb-3" routerLink="/auth/registro">
+                    ¿No tienes una cuenta? Crear una cuenta
+               </button>
+
+                <div *ngIf="error" class="alert alert-danger mt-3">
+                    El usuario o contraseña no son correctos.
+                </div>
+                <br><br>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>

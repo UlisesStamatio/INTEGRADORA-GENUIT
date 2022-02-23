@@ -1,0 +1,148 @@
+<div class="row">
+
+    <div class="col-md-6">
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="form">
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Título</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    placeholder="Título"
+                    formControlName="titulo"
+                    (keyup)="onChangeTitulo()">
+    
+                <mat-error *ngIf="form.controls.titulo.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+                <mat-error *ngIf="form.controls.titulo.hasError('minlength')">
+                    Debe tener al menos 3 caracteres
+                </mat-error>
+                <mat-error *ngIf="form.controls.titulo.hasError('maxlength')">
+                    Debe tener 250 caracteres como máximo
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Slug</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    placeholder="Slug"
+                    formControlName="slug">
+                <mat-error *ngIf="form.controls.slug.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+                <mat-error *ngIf="form.controls.slug.hasError('maxlength')">
+                    Debe tener 250 caracteres como máximo
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput  formControlName="descripcion" row="5"></textarea>
+                <mat-error *ngIf="form.controls.descripcion.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+        
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Direccion</mat-label>
+                <textarea matInput  formControlName="direccion" row="5"></textarea>
+                <mat-error *ngIf="form.controls.direccion.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Cupos</mat-label>
+                <input 
+                    matInput
+                    type="number" 
+                    placeholder="Cupos"
+                    formControlName="cupos">
+                <mat-error *ngIf="form.controls.cupos.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Equipos</mat-label>
+                <input 
+                    matInput
+                    type="number" 
+                    placeholder="Equipos"
+                    formControlName="equipos">
+                <mat-error *ngIf="form.controls.equipos.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Proyectores</mat-label>
+                <input 
+                    matInput
+                    type="number" 
+                    placeholder="Proyectores"
+                    formControlName="proyectores">
+                <mat-error *ngIf="form.controls.proyectores.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block" *ngIf="libro">
+                <mat-label>Status: </mat-label>
+                <select matNativeControl required formControlName="status">
+                  <option value="0">Desactivado</option>
+                  <option value="1">Activado</option>
+                </select>
+            </mat-form-field>
+
+        
+            <div class="mb-3">
+                <label class="d-block">Imagen de portada</label>
+        
+                <button type="button" mat-raised-button (click)="rutaPortadaInputFile.click()">
+                    Seleccionar archivo
+                </button>
+        
+                <input 
+                    class="d-none"
+                    type="file"
+                    accept="image/*"
+                    (change)="uploadFile($event, 'rutaPortada')"
+                    name="rutaPortada"
+                    #rutaPortadaInputFile>
+    
+                <mat-error *ngIf="form.controls['rutaPortada'].hasError('required') && form.controls.rutaPortada.touched">
+                    La imagen es obligatoria
+                </mat-error>
+            </div>
+    
+            <div class="alert-danger mb-3" *ngIf="errors.length">
+                <div *ngFor="let error of errors">{{ error }}</div>
+            </div>
+        
+            <button class="btn btn-danger ms-2" routerLink="/admin/espacios">
+                Cancelar
+            </button>
+        
+            <button class="btn btn-success ms-2" [disabled]="loading">
+                {{ loading ? 'Guardando...' : 'Guardar' }}
+            </button>
+        </form>
+    
+    </div>
+    
+    
+    <div class="col-md-4">
+        <img [src]="urlImagen" alt="" *ngIf="urlImagen; else sinImagen" class="w-100 border">
+    
+        <ng-template #sinImagen>
+            <div style="width: 450px; height: 250px; border: 1px solid lightblue; margin: 0 auto; padding-top: 5rem;" class="text-center">
+                Sin imagen
+            </div>
+        </ng-template>
+    </div>
+    
+    </div>

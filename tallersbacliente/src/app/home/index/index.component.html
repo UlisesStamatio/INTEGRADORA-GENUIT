@@ -1,0 +1,28 @@
+
+
+<div class="banner">
+    <div class="overlay"></div>
+</div>
+
+<hr>
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group mb-5">
+                <input type="text" class="form-control"  placeholder="Buscar espacio..." [(ngModel)]="filterPost" name="filterPost">            </div>
+        </div>
+    </div>
+
+    <h1 class="fw-bold"><mat-icon>access_time</mat-icon>Nuestros más recientes espacios: </h1>
+
+    <div class="row">
+
+        <div class="col-md-4 mb-3" *ngFor="let libro of ultimosLibros | filter:filterPost" id="contenedor">
+            <app-libro-card [libro]="libro" ></app-libro-card>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,88 @@
+<style>
+    .card{
+        position: relative;
+        width: 350px;
+        height: 600px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        align-items: center;
+    }
+    .card:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: calc(-100% + 4px);
+        width: 100%;
+        height: 100%;
+        background: #345177;
+        z-index: 1;
+        transition: 0.5s ease-in-out;
+    }
+    .card:hover::before{
+        bottom: 0;
+    }
+
+    .card img{
+        width: 250px;
+        height: 250px;
+    }
+
+    .card div{
+        position: relative;
+        z-index: 2;
+    }
+    
+    .card .reservar{
+        background:#345177 ;
+        color: #fff;
+        transition: 0.5s;
+    }
+
+    .card div h2{
+        margin-bottom: 10px;
+        font-size: 30px;
+        transition: 0.5s;
+        color: rgb(66, 66, 66);
+    }
+
+    .card div p{
+        font-size: 18px;
+        transition: 0.5s;
+        color: rgb(41, 40, 40);
+    }
+
+    .card:hover div h2,
+    .card:hover div p{
+        color:#fff;
+    }
+
+    .card:hover div .reservar{
+        background-color:#009574 ;
+    }
+
+</style>
+
+    <div class="card">
+        <div mat-card-image>
+            <img [src]="libro.urlPortada" [alt]="libro.titulo">
+        </div>
+        <div>
+            <h2>{{ libro.titulo }}</h2>
+            <p>{{ libro.descripcion | slice:0:100 }}...</p>
+            <p>Número de cupos: {{libro.cupos}}</p>
+            <p>Número de equipos: {{libro.equipos}}</p>
+        </div>
+        <div>
+                <button mat-raised-button class="reservar w-100 mb-3" [routerLink]="['/apartar', libro.slug]">
+                    <mat-icon>alarm</mat-icon> Reservar
+                </button>
+                <button mat-raised-button class="reservar w-100"  [routerLink]="['/espacios', libro.slug]">
+                    <mat-icon>more_horiz</mat-icon> Ver más
+                </button>
+        </div>
+        
+    </div>
+
+

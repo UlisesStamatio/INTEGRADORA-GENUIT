@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.alert-danger {
+    background-color: red;
+    padding: 1rem;
+    border-radius: 5px;
+    color: white;
+}
+
+.curso-card img {
+    width: 50%;
+    padding-top: 1rem;
+    margin: 0 auto;
+    display: block;
+}
+
+.curso-card a {
+    text-decoration: none;
+    color: #000;
+}
+
+.carrito-item {
+    height: auto !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.carrito-item .info {
+    line-height: normal;
+}
+
+
+
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+   
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+  }
+
+.spinner.btn-pago-paypal {
+    height: 48px;
+}

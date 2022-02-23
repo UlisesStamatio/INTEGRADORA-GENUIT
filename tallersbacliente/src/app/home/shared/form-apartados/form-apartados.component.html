@@ -1,0 +1,73 @@
+
+<style>
+    .reservar{
+        color: #FFF;
+        background: #345177;
+        background-image: linear-gradient(to right, transparent 50%, #009574 50%, #345177 100%);
+        background-size: 200%;
+        background-position: 0% 50%;
+        transition: 0.8s;
+    }
+    .reservar:hover {
+	color: #FFF;
+	background-position: 100% 50%;
+    }
+</style>
+
+<br><br>
+<h1 class="text-center justify-content-center"><mat-icon>alarm</mat-icon>Reservar</h1>
+<br><br>
+
+<div class="row justify-content-center text-center">
+    
+    <div class="col-md-6">
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="form">
+            
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Fecha inicio</mat-label>
+                <input
+                    matInput
+                    type="datetime-local"
+                    formControlName="fechaInicio">
+                <mat-error *ngIf="form.controls.fechaInicio.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Fecha fin</mat-label>
+                <input
+                    matInput
+                    type="datetime-local"
+                    formControlName="fechaFin">
+                <mat-error *ngIf="form.controls.fechaFin.hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+        
+    
+            <div class="alert-danger mb-3" *ngIf="errors.length">
+                <div *ngFor="let error of errors">{{ error }}</div>
+            </div>
+        
+
+            <button class="btn ms-2 mb-3 reservar w-100" [disabled]="loading">
+                {{ loading ? 'Reservando...' : 'Reservar' }}
+            </button>
+            <br>
+            <button class="btn btn-danger ms-2 w-100" routerLink="/">
+                Cancelar
+            </button>
+        
+            
+        </form>
+        
+    </div>
+    
+    
+   
+    
+</div>
+
+
+

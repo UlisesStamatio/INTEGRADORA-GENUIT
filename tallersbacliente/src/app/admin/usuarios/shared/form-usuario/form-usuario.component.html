@@ -1,0 +1,101 @@
+<div class="row">
+
+    <div class="col-md-6">
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="form">
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Nombres</mat-label>
+                <input matInput type="text" placeholder="Nombres" formControlName="nombres">
+                
+                <mat-error *ngIf="form.controls['nombres'].hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Apellidos</mat-label>
+
+                <input matInput type="text" placeholder="Apellidos" formControlName="apellidos">
+
+                <mat-error *ngIf="form.controls['apellidos'].hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Correo electrónico</mat-label>
+
+                <input matInput type="email" placeholder="Correo electrónico" formControlName="email">
+
+                <mat-error *ngIf="form.controls['email'].hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+                <mat-error *ngIf="form.controls['email'].hasError('email')">
+                    Ingrese un correo electrónico válido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Contraseña</mat-label>
+
+                <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Contraseña" formControlName="passwordPlain">
+
+                <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                    {{ hidePassword ? 'visibility_off' : 'visibility' }}
+                </mat-icon>
+
+                <mat-error *ngIf="form.controls['passwordPlain'].hasError('required')">
+                    Este campo es obligatorio
+                </mat-error>
+                <mat-error *ngIf="form.controls['passwordPlain'].hasError('minlength')">
+                    La contraseña debe tener al menos 4 caracteres
+                </mat-error>
+            </mat-form-field>
+        
+
+            
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Cargo: </mat-label>
+                    <select matNativeControl required formControlName="cargo">
+                      <option value="Maestro">Maestro</option>
+                      <option value="Secretario">Secretario</option>
+                      <option value="Director">Director</option>
+                    </select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block">
+                <mat-label>Rol: </mat-label>
+                    <select matNativeControl required formControlName="rol">
+                      <option value="ADMIN">ADMIN</option>
+                      <option value="USUARIO">USUARIO</option>
+                    </select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="d-block" *ngIf="usuario">
+                <mat-label>Status: </mat-label>
+                <select matNativeControl required formControlName="status">
+                  <option value="0">Desactivado</option>
+                  <option value="1">Activado</option>
+                </select>
+            </mat-form-field>
+
+        
+    
+            <div class="alert-danger mb-3" *ngIf="errors.length">
+                <div *ngFor="let error of errors">{{ error }}</div>
+            </div>
+        
+            <button class="btn btn-danger ms-2" routerLink="/admin/usuarios">
+                Cancelar
+            </button>
+        
+            <button class="btn btn-success ms-2" [disabled]="loading">
+                {{ loading ? 'Guardando...' : 'Guardar' }}
+            </button>
+        </form>
+    
+    </div>
+    
+    
+
+    
+</div>

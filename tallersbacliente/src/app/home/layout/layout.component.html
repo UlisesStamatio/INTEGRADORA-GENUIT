@@ -1,0 +1,50 @@
+<mat-toolbar style="background-color: #009574; color: #ffff;" *ngIf="isLoggedIn();">
+    <span>GEINUT</span>
+
+    <button mat-button routerLink="/" class="ms-2">
+        <mat-icon>home</mat-icon> Inicio
+    </button>
+
+    <button mat-button routerLink="/espacios" class="ms-2">
+        <mat-icon> map</mat-icon> Espacios
+    </button>
+
+    <button mat-button routerLink="/admin/espacios" class="ms-2" *ngIf="isAdmin()">
+        <mat-icon>build</mat-icon> Administración
+    </button>
+
+    <span class="spacer"></span>
+
+    
+
+    <ng-container *ngIf="isLoggedIn(); else loginButtons">
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>account_circle</mat-icon> {{ user }}
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon> Cerrar sesión
+            </button>
+        </mat-menu>
+    </ng-container>
+
+
+    <ng-template #loginButtons>
+        <!--
+        <button mat-button routerLink="/auth/login">
+            Iniciar sesión
+        </button>
+
+        <button mat-raised-button color="primary" routerLink="/auth/registro" class="ms-2">
+            Registrarme
+        </button>
+        -->
+    </ng-template>
+
+
+</mat-toolbar>
+
+
+
+<router-outlet></router-outlet>

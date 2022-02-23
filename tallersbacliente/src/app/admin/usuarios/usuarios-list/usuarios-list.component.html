@@ -1,0 +1,93 @@
+<h1 class="fw-bold"><mat-icon>supervisor_account</mat-icon>Lista de Usuarios</h1>
+
+<div class="text-end">
+  <button class="btn btn-success" routerLink="/admin/usuarios/nuevo">
+    <mat-icon>supervised_user_circle</mat-icon>Nuevo espacio
+  </button>
+</div>
+
+<div *ngIf="usuarioPage">
+  <table mat-table [dataSource]="usuarioPage.content" class="w-100">
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>Nombre completo y email</th>
+      <td mat-cell *matCellDef="let usuario">
+
+        <div class="d-flex gap-2">
+          <div>
+            <div class="fw-bold">{{ usuario.nombres }} {{usuario.apellidos}}</div>
+          </div>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let usuario">
+        
+        <p style="color: rgb(31, 161, 31);" class="fw-bold" *ngIf="usuario.status==1">
+          Activo
+        </p>
+
+        <p style="color: rgb(177, 44, 44)" class="fw-bold" *ngIf="usuario.status==0">
+          Inactivo
+        </p>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rol">
+      <th mat-header-cell *matHeaderCellDef>Rol</th>
+      <td mat-cell *matCellDef="let usuario" class="fw-bold">
+        {{ usuario.rol}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cargo">
+      <th mat-header-cell *matHeaderCellDef>Cargo</th>
+      <td mat-cell *matCellDef="let usuario">
+        {{ usuario.cargo}}
+      </td>
+    </ng-container>
+
+    
+
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef>Correo Electrónico</th>
+      <td mat-cell *matCellDef="let usuario">
+        {{ usuario.email }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaCreacion">
+      <th mat-header-cell *matHeaderCellDef>F. creación</th>
+      <td mat-cell *matCellDef="let usuario">
+        {{ usuario.fechaCreacion | date:'dd/MM/yyyy hh:mm a' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let usuario" class="text-end">
+        <button class="btn btn-primary me-2" matTooltip="Editar espacio" [routerLink]="[usuario.id, 'editar']">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="usuario.status==1" class="btn btn-danger me-2" matTooltip="Desactivar espacio" (click)="delete(usuario)">
+          <mat-icon> domain_disabled</mat-icon>
+        </button>
+      </td>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="usuarioPage.totalElements" [pageSize]="usuarioPage.size" [pageSizeOptions]="[5, 20, 50]"
+    showFirstLastButtons (page)="onPaginateChange($event)">
+  </mat-paginator>
+</div>
+
+
+<br><br><br><br><br><br><br>
