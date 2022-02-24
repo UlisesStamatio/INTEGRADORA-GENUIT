@@ -20,19 +20,12 @@
       <th mat-header-cell *matHeaderCellDef>Estado</th>
       <td mat-cell *matCellDef="let libro">
         
-        <p style="color: rgb(31, 161, 31);" class="fw-bold" *ngIf="libro.estado==2">
-        	<mat-icon>alarm_on</mat-icon>  Aceptado
-        </p>
-
-        <p style="color: rgb(189, 209, 75)" class="fw-bold" *ngIf="libro.estado==1">
-            <mat-icon>alarm_add</mat-icon>
-            Pendiente
-          </p>
-
-        <p style="color: rgb(177, 44, 44)" class="fw-bold" *ngIf="libro.estado==0">
-            <mat-icon>alarm_off</mat-icon>Rechazado
-        </p>
-
+       
+        <span class="badge rounded-pill bg-success" *ngIf="libro.estado==2">Aceptado</span>
+        
+        <span class="badge rounded-pill bg-warning" *ngIf="libro.estado==1">Pendiente</span>
+        
+        <span class="badge rounded-pill bg-danger" *ngIf="libro.estado==0">Rechazado</span>
         
 
       </td>

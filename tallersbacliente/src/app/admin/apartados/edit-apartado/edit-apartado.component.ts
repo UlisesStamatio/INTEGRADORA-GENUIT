@@ -46,7 +46,7 @@ export class EditApartadoComponent implements OnInit {
         Swal.fire({
           title: 'La respuesta se está enviando...',
           html: 'Este mensaje se cerrará en unos segundos, por favor espere.',
-          timer: 7000,
+          timer: 11000,
           timerProgressBar: true,
           didOpen: () => {
             Swal.showLoading()

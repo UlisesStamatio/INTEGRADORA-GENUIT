@@ -26,13 +26,8 @@
       <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let usuario">
         
-        <p style="color: rgb(31, 161, 31);" class="fw-bold" *ngIf="usuario.status==1">
-          Activo
-        </p>
-
-        <p style="color: rgb(177, 44, 44)" class="fw-bold" *ngIf="usuario.status==0">
-          Inactivo
-        </p>
+        <span class="badge rounded-pill bg-success" *ngIf="usuario.status==1">Activo</span>
+        <span class="badge rounded-pill bg-danger" *ngIf="usuario.status==0">Inactivo</span>
 
       </td>
     </ng-container>
