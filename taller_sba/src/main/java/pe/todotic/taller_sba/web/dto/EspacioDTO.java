@@ -38,12 +38,4 @@ public class EspacioDTO {
 
     private int status;
 
-    /*
-    @NotBlank
-    private String rutaArchivo;
-
-    @NotNull
-    @PositiveOrZero
-    private Float precio;
-*/
 }
