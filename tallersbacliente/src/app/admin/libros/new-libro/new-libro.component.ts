@@ -32,11 +32,12 @@ export class NewLibroComponent implements OnInit {
       confirmButtonText: 'Si, crear'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          '¡Éxito!',
-          'El espacio se ha creado correctamente.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'Exito, la respuesta se envió correctamente.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.libroService.create(libro)
       .subscribe(data => {
         this.router.navigate(['admin', 'espacios'])

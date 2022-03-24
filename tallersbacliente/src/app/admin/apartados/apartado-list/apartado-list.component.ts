@@ -3,6 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { ApartadosService } from '../shared/apartados.service'; 
 import Swal from 'sweetalert2';
 import { ApartadosPage } from '../shared/apartados.model';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-apartado-list',
@@ -14,11 +15,13 @@ export class ApartadoListComponent implements OnInit {
   apartadosPage!:ApartadosPage;
 
   constructor(
-    private apartadosService: ApartadosService
+    private apartadosService: ApartadosService,
+    public _MatPaginatorIntl: MatPaginatorIntl
   ) { }
 
   ngOnInit(): void {
     this.getAll();
+    this._MatPaginatorIntl.itemsPerPageLabel = 'Resultados por página';
   }
 
 

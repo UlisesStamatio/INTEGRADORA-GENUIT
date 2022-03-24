@@ -31,8 +31,7 @@ export class FormApartadosComponent implements OnInit {
       espacio: [this.libro?.id,[Validators.required]],
       usuario: [idUsuario, [Validators.required]],
     });
-    
-
+ 
   }
 
   

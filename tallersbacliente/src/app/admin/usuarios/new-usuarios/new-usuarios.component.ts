@@ -30,11 +30,12 @@ export class NewUsuariosComponent implements OnInit {
       confirmButtonText: 'Si, crear'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          '¡Éxito!',
-          'El usuario se ha creado correctamente.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'Exito, la respuesta se envió correctamente.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.usuarioService.create(usuario)
       .subscribe(data => {
         this.router.navigate(['admin', 'usuarios'])

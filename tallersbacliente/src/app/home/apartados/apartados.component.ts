@@ -41,13 +41,23 @@ export class ApartadosComponent implements OnInit {
       confirmButtonText: 'Si, reservar'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          '¡Éxito!',
-          'Se ha enviado la petición correctamente.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'Exito, la respuesta se envió correctamente.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.apartadosService.create(apartados)
       .subscribe(data => {
+        if(data===null){
+          Swal.fire({
+            icon: 'error',
+            title: 'Error...',
+            text: 'Ha habido un problema con las fechas ingresadas!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
         this.router.navigate(['/'])
       }, error => {
         if (error.status == 422) {

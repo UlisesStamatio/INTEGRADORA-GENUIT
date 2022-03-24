@@ -23,7 +23,7 @@
             </mat-form-field>
     
             <mat-form-field appearance="outline" class="d-block">
-                <mat-label>Slug</mat-label>
+                <mat-label>Identificador</mat-label>
                 <input
                     matInput
                     type="text"
@@ -47,7 +47,7 @@
         
 
             <mat-form-field appearance="outline" class="d-block">
-                <mat-label>Direccion</mat-label>
+                <mat-label>Dirección</mat-label>
                 <textarea matInput  formControlName="direccion" row="5"></textarea>
                 <mat-error *ngIf="form.controls.direccion.hasError('required')">
                     Este campo es obligatorio
@@ -91,7 +91,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="d-block" *ngIf="libro">
-                <mat-label>Status: </mat-label>
+                <mat-label>Estado </mat-label>
                 <select matNativeControl required formControlName="status">
                   <option value="0">Desactivado</option>
                   <option value="1">Activado</option>
@@ -123,11 +123,11 @@
                 <div *ngFor="let error of errors">{{ error }}</div>
             </div>
         
-            <button class="btn btn-danger ms-2" routerLink="/admin/espacios">
+            <button class="btn btn-danger ms-2 col-4" routerLink="/admin/espacios">
                 Cancelar
             </button>
         
-            <button class="btn btn-success ms-2" [disabled]="loading">
+            <button class="btn btn-success ms-2 col-4" [disabled]="loading">
                 {{ loading ? 'Guardando...' : 'Guardar' }}
             </button>
         </form>

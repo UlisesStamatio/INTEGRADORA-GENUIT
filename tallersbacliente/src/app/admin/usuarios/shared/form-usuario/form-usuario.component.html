@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-center">
 
     <div class="col-md-6">
         <form (ngSubmit)="save()" autocomplete="off" [formGroup]="form">
@@ -71,7 +71,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="d-block" *ngIf="usuario">
-                <mat-label>Status: </mat-label>
+                <mat-label>Estado: </mat-label>
                 <select matNativeControl required formControlName="status">
                   <option value="0">Desactivado</option>
                   <option value="1">Activado</option>
@@ -84,13 +84,15 @@
                 <div *ngFor="let error of errors">{{ error }}</div>
             </div>
         
-            <button class="btn btn-danger ms-2" routerLink="/admin/usuarios">
+            <button class="btn btn-success ms-2 col-12 mb-3" [disabled]="loading">
+                {{ loading ? 'Guardando...' : 'Guardar' }}
+            </button>
+
+            <button class="btn btn-danger ms-2 col-12 mb-3" routerLink="/admin/usuarios">
                 Cancelar
             </button>
         
-            <button class="btn btn-success ms-2" [disabled]="loading">
-                {{ loading ? 'Guardando...' : 'Guardar' }}
-            </button>
+            
         </form>
     
     </div>

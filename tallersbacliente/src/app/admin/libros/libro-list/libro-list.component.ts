@@ -3,6 +3,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { LibroPage } from '../shared/libro.model';
 import { LibroService } from '../shared/libro.service';
 import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-libro-list',
@@ -12,20 +15,23 @@ import Swal from 'sweetalert2';
 export class LibroListComponent implements OnInit {
   displayedColumns: string[] = ['titulo','status', 'cupos','equipos','proyectores', 'fechaCreacion', 'acciones'];
   libroPage!: LibroPage;
-
+  dataSource!: MatTableDataSource<any>
   constructor(
-    private libroService: LibroService
+    private libroService: LibroService,
+    public _MatPaginatorIntl: MatPaginatorIntl
   ) {
   }
 
 
   ngOnInit(): void {
+    this._MatPaginatorIntl.itemsPerPageLabel = 'Resultados por página';
     this.getAll();
   }
 
   getAll() {
-    this.libroService.getAll()
-      .subscribe((libroPage) => this.libroPage = libroPage);
+    this.libroService.getAll().subscribe((libroPage) =>{
+        this.libroPage = libroPage;
+      })      
   }
 
   delete(libro: any) {
@@ -41,11 +47,12 @@ export class LibroListComponent implements OnInit {
       confirmButtonText: 'Si, desactivar'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          '¡Desactivado!',
-          'El espacio se ha desactivado correctamente.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'El espacio se ha desactivado correctamente.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.libroService.delete(libro.id)
         .subscribe(() => {
           this.getAll();

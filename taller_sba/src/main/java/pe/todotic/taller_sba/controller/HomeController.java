@@ -71,6 +71,11 @@ public class HomeController extends BaseController {
     @PostMapping("/apartar")
     Apartados crear(@RequestBody @Validated ApartadosDTO apartadosDTO) {
         Apartados apartados = new ModelMapper().map(apartadosDTO, Apartados.class);
+
+        if(apartados.getFechaInicio().equals(apartados.getFechaFin())){
+            return null;
+        }
+
         apartados.setEspacio(espacioRepository.getById(apartadosDTO.getEspacio()));
         apartados.setUsuario(usuarioRepository.getById(apartadosDTO.getUsuario()));
         apartados.setEstado(1);

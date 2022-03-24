@@ -16,7 +16,8 @@ import { FormUsuarioComponent } from './usuarios/shared/form-usuario/form-usuari
 import { ApartadoListComponent } from './apartados/apartado-list/apartado-list.component';
 import { EditApartadoComponent } from './apartados/edit-apartado/edit-apartado.component';
 import { FormApartadoComponent } from './apartados/shared/form-apartado/form-apartado.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,8 @@ import { FormApartadoComponent } from './apartados/shared/form-apartado/form-apa
     ReactiveFormsModule,
     ReactiveFormsModule,
     AdminRoutingModule,
+    MatTableModule,
+    MatInputModule,
     HttpClientModule,
     MaterialModule
   ]

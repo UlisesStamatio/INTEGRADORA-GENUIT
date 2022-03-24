@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { PageEvent } from '@angular/material/paginator';
 import { UsuarioPage } from '../shared/usuario.model';
 import { UsuariosService } from '../shared/usuarios.service';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-usuarios-list',
@@ -14,10 +15,14 @@ export class UsuariosListComponent implements OnInit {
   usuarioPage!: UsuarioPage;
 
   constructor(
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    public _MatPaginatorIntl: MatPaginatorIntl
+
   ) { }
 
   ngOnInit(): void {
+    this._MatPaginatorIntl.itemsPerPageLabel = 'Resultados por página';
+
     this.getAll();
   }
 
@@ -39,11 +44,12 @@ export class UsuariosListComponent implements OnInit {
       confirmButtonText: 'Si, desactivar'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          '¡Desactivado!',
-          'El usuario se ha desactivado correctamente.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'El usuario se ha desactivado correctamente.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.usuariosService.delete(usuario.id)
         .subscribe(() => {
           this.getAll();

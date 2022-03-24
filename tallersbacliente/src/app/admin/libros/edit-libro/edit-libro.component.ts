@@ -36,11 +36,12 @@ export class EditLibroComponent implements OnInit {
       confirmButtonText: 'Si, actualizar'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          '¡Éxito!',
-          'El espacio se ha actualizado correctamente.',
-          'success'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'Exito, la respuesta se envió correctamente.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         this.libroService.update(this.libro.id, libro)
       .subscribe((data) => this.router.navigate(['admin/espacios']));
       }

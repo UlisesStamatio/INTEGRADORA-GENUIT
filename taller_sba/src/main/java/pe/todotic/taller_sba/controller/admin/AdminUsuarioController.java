@@ -17,6 +17,7 @@ import pe.todotic.taller_sba.repo.UsuarioRepository;
 import pe.todotic.taller_sba.web.dto.UsuarioDTO;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/usuarios")
@@ -36,6 +37,13 @@ public class AdminUsuarioController extends BaseController {
         Page<Usuario> usuarios = usuarioRepository.findAll(pageable);
         return usuarios;
     }
+
+    @GetMapping("/listar")
+    List<Usuario> listar(){
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return usuarios;
+    }
+
 
     @GetMapping("{id}")
     Usuario get(@PathVariable Integer id){

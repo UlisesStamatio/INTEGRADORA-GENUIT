@@ -1,10 +1,11 @@
 <style>
-    .center{
+    .center {
         box-sizing: border-box;
         border: 1px solid #cccccc;
         border-radius: 10%;
     }
-    .reservar{
+
+    .reservar {
         color: #FFF;
         background: #345177;
         background-image: linear-gradient(to right, transparent 50%, #009574 50%, #345177 100%);
@@ -12,19 +13,34 @@
         background-position: 0% 50%;
         transition: 0.8s;
     }
+
     .reservar:hover {
-	color: #FFF;
-	background-position: 100% 50%;
+        color: #FFF;
+        background-position: 100% 50%;
     }
-    </style>
+
+    .wrapper .title{
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  user-select: none;
+  border-radius: 15px 15px 0 0;
+  background: linear-gradient(-135deg, #345177, #009574);
+}
+</style>
 <div class="container mt-5">
-    
+
 
     <div class="row justify-content-center">
-       
-        <div class=" center col-md-6 col-lg-4">
+
+        <div class=" center col-md-6 col-lg-4 mat-elevation-z10">
             <br>
-            <h1 class="fw-bold text-center">Inicio de sesión</h1>
+            <div class="wrapper mb-3">
+                <div class="title">Inicio de sesión</div>
+                <hr>
+            </div>
             <form autocomplete="off" (ngSubmit)="login(formulario)" #formulario="ngForm">
 
                 <mat-form-field appearance="outline" class="d-block">
@@ -43,22 +59,24 @@
 
                 <mat-form-field appearance="outline" class="d-block">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" placeholder="Contraseña" name="password"
+                    <input matInput [type]="hidePassword ? 'password' : 'text'" matInput type="password" placeholder="Contraseña" name="password"
                         [(ngModel)]="credentials.password" #password="ngModel" required>
-
+                        <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                            {{ hidePassword ? 'visibility_off' : 'visibility' }}
+                        </mat-icon>
                     <mat-error *ngIf="password.hasError('required')">
                         Este campo es obligatorio
                     </mat-error>
                 </mat-form-field>
 
-                
+
                 <button mat-raised-button class="reservar w-100 mb-3">
-                     Ingresar
+                    Ingresar
                 </button>
 
                 <button mat-raised-button class="reservar w-100 mb-3" routerLink="/auth/registro">
                     ¿No tienes una cuenta? Crear una cuenta
-               </button>
+                </button>
 
                 <div *ngIf="error" class="alert alert-danger mt-3">
                     El usuario o contraseña no son correctos.

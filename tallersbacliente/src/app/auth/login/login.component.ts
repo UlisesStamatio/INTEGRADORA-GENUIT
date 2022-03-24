@@ -9,6 +9,7 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: []
 })
 export class LoginComponent implements OnInit {
+  hidePassword: boolean = true;
 
   returnUrl: string = '/';
   error: boolean = false;
