@@ -10,11 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.todotic.taller_sba.controller.BaseController;
+import pe.todotic.taller_sba.model.Apartados;
 import pe.todotic.taller_sba.model.Espacio;
 import pe.todotic.taller_sba.repo.EspacioRepository;
 import pe.todotic.taller_sba.web.dto.EspacioDTO;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/espacios")
@@ -37,6 +39,17 @@ public class AdminLibroController extends BaseController {
 
         return libros;
     }
+
+    @GetMapping("/listar")
+    List<Espacio> listar() {
+        List<Espacio> espacios = espacioRepository.findAll();
+
+        espacios.forEach(libro -> {
+            libro.setUrlPortada(buildUrlString(libro.getRutaPortada()));
+        });
+        return espacios;
+    }
+
 
     @GetMapping("{id}")
     Espacio get(@PathVariable Integer id) {

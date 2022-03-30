@@ -17,6 +17,7 @@ import pe.todotic.taller_sba.web.dto.ApartadosDTO;
 
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/apartados")
@@ -32,12 +33,18 @@ public class AdminApartadosController extends BaseController {
         this.apartadosRepository = apartadosRepository;
     }
 
-
     @GetMapping
     Page<Apartados> index(@PageableDefault(size = 5, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Apartados> apartados = apartadosRepository.findAll(pageable);
         return apartados;
     }
+
+    @GetMapping("/listar")
+    List<Apartados> listar() {
+        List<Apartados> apartados = apartadosRepository.findAll();
+        return apartados;
+    }
+
 
     @GetMapping("{id}")
     Apartados get(@PathVariable Integer id) {
