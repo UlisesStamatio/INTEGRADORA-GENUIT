@@ -15,6 +15,11 @@ import pe.todotic.taller_sba.repo.EspacioRepository;
 import pe.todotic.taller_sba.repo.UsuarioRepository;
 import pe.todotic.taller_sba.service.FileSystemStorageService;
 import pe.todotic.taller_sba.web.dto.ApartadosDTO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -71,6 +76,39 @@ public class HomeController extends BaseController {
     @PostMapping("/apartar")
     Apartados crear(@RequestBody @Validated ApartadosDTO apartadosDTO) {
         Apartados apartados = new ModelMapper().map(apartadosDTO, Apartados.class);
+
+        String fechaInicio = apartados.getFechaInicio();
+        String[] parts = fechaInicio.split("T");
+        String fechaI = parts[0];
+        System.out.println(fechaI);
+        String fechaFin = apartados.getFechaFin();
+        String[] parts2 = fechaFin.split("T");
+        String fechaF = parts2[0];
+
+
+
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+            Date fechaInicioD = dateFormat.parse(fechaI);
+            Date fechaFinD = dateFormat.parse(fechaF);
+            System.out.println("Date-1: " + dateFormat.format(fechaInicioD));
+            System.out.println("Date-2: " + dateFormat.format(fechaFinD));
+            if(fechaFinD.before(fechaInicioD)){
+                System.out.println(
+                        "Error");
+                return null;
+            }
+            if(fechaInicioD.after(fechaFinD)){
+                System.out.println(
+                        "Error");
+                return null;
+            }
+
+
+
+        } catch (ParseException ex) {
+        }
 
         if(apartados.getFechaInicio().equals(apartados.getFechaFin())){
             return null;
