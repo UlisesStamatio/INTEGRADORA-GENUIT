@@ -92,8 +92,8 @@ public class HomeController extends BaseController {
             SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
             Date fechaInicioD = dateFormat.parse(fechaI);
             Date fechaFinD = dateFormat.parse(fechaF);
-            System.out.println("Date-1: " + dateFormat.format(fechaInicioD));
-            System.out.println("Date-2: " + dateFormat.format(fechaFinD));
+            System.out.println("Fecha-1: " + dateFormat.format(fechaInicioD));
+            System.out.println("Fecha-2: " + dateFormat.format(fechaFinD));
             if(fechaFinD.before(fechaInicioD)){
                 System.out.println(
                         "Error");
